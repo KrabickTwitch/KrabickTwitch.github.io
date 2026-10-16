@@ -3,11 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Мои ссылки</title>
+    <title>KrabickTwitch - Ссылки</title>
+    <!-- Подключаем красивый шрифт -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <!-- Подключаем иконки Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        /* --- ОБЩИЕ НАСТРОЙКИ И ФОН --- */
         body {
-            font-family: sans-serif;
-            background-color: #121212;
+            font-family: 'Inter', sans-serif;
+            /* Темный градиентный фон (как ночной космос) */
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
             color: #ffffff;
             display: flex;
             flex-direction: column;
@@ -15,47 +21,122 @@
             justify-content: center;
             min-height: 100vh;
             margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
         }
         .container {
-            text-align: center;
-            max-width: 400px;
+            max-width: 450px;
             width: 100%;
+            text-align: center;
+            animation: fadeIn 1s ease-in-out; /* Плавное появление сайта */
         }
-        /* Вот эти стили отвечают за круглую аватарку */
+        
+        /* --- АВАТАРКА --- */
         .avatar {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%; /* Делает круг */
-            object-fit: cover;  /* Обрезает лишнее, не растягивая */
-            border: 3px solid #9146FF;
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #9146FF; /* Фиолетовая рамка */
+            box-shadow: 0 0 25px rgba(145, 70, 255, 0.6); /* Свечение вокруг аватарки */
             margin-bottom: 15px;
+            transition: transform 0.3s ease;
         }
-        h1 { margin: 10px 0 5px 0; }
-        p { color: #aaaaaa; margin-bottom: 30px; }
+        .avatar:hover {
+            transform: scale(1.05); /* Увеличение при наведении */
+        }
+
+        /* --- ТЕКСТ --- */
+        h1 {
+            font-size: 28px;
+            font-weight: 800;
+            margin: 10px 0 5px 0;
+            letter-spacing: 1px;
+        }
+        p {
+            font-size: 15px;
+            color: #b0b0b0;
+            margin-bottom: 30px;
+        }
+
+        /* --- КНОПКИ-ССЫЛКИ --- */
         .link-btn {
-            display: block;
-            background-color: #1f1f1f;
-            color: #ffffff;
-            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px; /* Расстояние между иконкой и текстом */
             padding: 16px;
             margin-bottom: 15px;
-            border-radius: 10px;
+            border-radius: 12px;
+            color: #ffffff;
+            text-decoration: none;
             font-weight: 600;
-            border: 1px solid #333;
+            font-size: 16px;
+            transition: all 0.3s ease; /* Плавная анимация */
+            border: none;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
-        .link-btn:hover { background-color: #9146FF; }
+        
+        /* Эффект при наведении на кнопку */
+        .link-btn:hover {
+            transform: translateY(-4px); /* Кнопка "подпрыгивает" */
+            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+            filter: brightness(1.15); /* Кнопка становится чуть ярче */
+        }
+
+        /* --- ЦВЕТА ДЛЯ КАЖДОЙ ПЛАТФОРМЫ --- */
+        .twitch { background-color: #9146FF; }
+        .youtube { background-color: #FF0000; }
+        .telegram { background-color: #24A1DE; }
+        .discord { background-color: #5865F2; }
+        .tiktok { background-color: #000000; border: 1px solid #333; }
+        .vk { background-color: #0077FF; }
+        .donate { background-color: #FF5E5E; } /* Для донатов */
+
+        /* Анимация появления */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- Убедитесь, что здесь есть class="avatar" -->
-        <img src="https://unavatar.io/twitch/krabick" alt="Аватар" class="avatar">
+        <!-- Аватарка (замените ник на свой) -->
+        <img src="https://unavatar.io/twitch/krabicktwitch" alt="Аватар" class="avatar">
         
         <h1>KrabickTwitch</h1>
-        <p>Мои ссылки и соцсети</p>
+        <p>Стример и просто хороший человек</p>
 
-        <a href="https://twitch.tv/ваш_канал" class="link-btn" target="_blank">Twitch</a>
-        <a href="https://t.me/ваш_канал" class="link-btn" target="_blank">Telegram</a>
+        <!-- ССЫЛКИ (замените ссылки в href на свои) -->
+        <a href="https://twitch.tv/krabick" class="link-btn twitch" target="_blank">
+            <i class="fab fa-twitch"></i> Twitch
+        </a>
+        
+        <a href="https://youtube.com/@krabickVODs" class="link-btn youtube" target="_blank">
+            <i class="fab fa-youtube"></i> ЗАПИСЬ СТРИМОВ
+
+        </a>
+        
+        <a href="https://t.me/krabick" class="link-btn telegram" target="_blank">
+            <i class="fab fa-telegram"></i> Telegram
+        </a>
+        
+        <a href="https://discord.com/invite/4cCk3pj" class="link-btn discord" target="_blank">
+            <i class="fab fa-discord"></i> Discord
+        </a>
+        
+        <a href="https://tiktok.com/@ваш_канал" class="link-btn tiktok" target="_blank">
+            <i class="fab fa-tiktok"></i> TikTok
+        </a>
+        
+        <a href="https://vk.com/ваш_канал" class="link-btn vk" target="_blank">
+            <i class="fab fa-vk"></i> VK
+        </a>
+        
+        <a href="https://www.donationalerts.com/r/ваш_канал" class="link-btn donate" target="_blank">
+            <i class="fas fa-heart"></i> Поддержать донатом
+        </a>
     </div>
 </body>
 </html>
