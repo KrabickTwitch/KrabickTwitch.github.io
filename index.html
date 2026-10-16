@@ -5,10 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Мои ссылки</title>
     <style>
-        /* Настройки внешнего вида */
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #121212; /* Темный фон, как у многих стримеров */
+            font-family: sans-serif;
+            background-color: #121212;
             color: #ffffff;
             display: flex;
             flex-direction: column;
@@ -16,33 +15,23 @@
             justify-content: center;
             min-height: 100vh;
             margin: 0;
-            padding: 20px;
-            box-sizing: border-box;
         }
         .container {
+            text-align: center;
             max-width: 400px;
             width: 100%;
-            text-align: center;
         }
-        /* Стиль для аватарки */
+        /* Вот эти стили отвечают за круглую аватарку */
         .avatar {
             width: 120px;
             height: 120px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 3px solid #9146FF; /* Фиолетовый цвет Twitch */
+            border-radius: 50%; /* Делает круг */
+            object-fit: cover;  /* Обрезает лишнее, не растягивая */
+            border: 3px solid #9146FF;
             margin-bottom: 15px;
         }
-        h1 {
-            font-size: 24px;
-            margin: 10px 0 5px 0;
-        }
-        p {
-            font-size: 14px;
-            color: #aaaaaa;
-            margin-bottom: 30px;
-        }
-        /* Стиль для кнопок-ссылок */
+        h1 { margin: 10px 0 5px 0; }
+        p { color: #aaaaaa; margin-bottom: 30px; }
         .link-btn {
             display: block;
             background-color: #1f1f1f;
@@ -52,30 +41,21 @@
             margin-bottom: 15px;
             border-radius: 10px;
             font-weight: 600;
-            transition: all 0.3s ease;
             border: 1px solid #333;
         }
-        .link-btn:hover {
-            background-color: #9146FF; /* Цвет при наведении */
-            border-color: #9146FF;
-            transform: scale(1.02);
-        }
+        .link-btn:hover { background-color: #9146FF; }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- ЗАМЕНИТЕ ССЫЛКУ НА ВАШУ АВАТАРКУ (загрузите картинку в репозиторий или вставьте ссылку) -->
-        <img src="https://unavatar.io/twitch/krabick">
+        <!-- Убедитесь, что здесь есть class="avatar" -->
+        <img src="https://unavatar.io/twitch/krabick" alt="Аватар" class="avatar">
         
-        <!-- ЗАМЕНИТЕ НА ВАШЕ ИМЯ -->
         <h1>KrabickTwitch</h1>
         <p>Мои ссылки и соцсети</p>
 
-        <!-- ЗАМЕНИТЕ ССЫЛКИ (href) И ТЕКСТ ВНУТРИ КАВЫЧЕК -->
         <a href="https://twitch.tv/ваш_канал" class="link-btn" target="_blank">Twitch</a>
         <a href="https://t.me/ваш_канал" class="link-btn" target="_blank">Telegram</a>
-        <a href="https://youtube.com/@ваш_канал" class="link-btn" target="_blank">YouTube</a>
-        <a href="mailto:ваша_почта@example.com" class="link-btn">Написать мне</a>
     </div>
 </body>
 </html>
