@@ -35,33 +35,33 @@
             z-index: 10;
         }
         
-        /* --- ЛЕТАЮЩИЕ ШЛЕМЫ (ИЗ ВАШЕГО ФАЙЛА) --- */
+        /* --- ЛЕТАЮЩИЕ ШЛЕМЫ (БЕЛЫЕ, МАЛЕНЬКИЕ) --- */
         .background-helmets {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            pointer-events: none; /* Чтобы не мешали кликам */
+            pointer-events: none;
             z-index: 1;
             overflow: hidden;
         }
         .helmet {
             position: absolute;
             bottom: -120px;
-            width: 70px;
+            width: 40px; /* Уменьшили базовый размер */
             opacity: 0;
             animation: floatUp 25s linear infinite;
-            /* Если ваш файл называется иначе, поменяйте имя в src ниже */
+            filter: brightness(0) invert(1); /* Делает картинку полностью белой */
         }
-        /* Настройки для каждого шлема (размер, скорость, задержка) */
-        .helmet:nth-child(1) { left: 5%; animation-duration: 25s; animation-delay: 0s; width: 60px; }
-        .helmet:nth-child(2) { left: 20%; animation-duration: 18s; animation-delay: 3s; width: 80px; }
-        .helmet:nth-child(3) { left: 35%; animation-duration: 30s; animation-delay: 6s; width: 50px; }
-        .helmet:nth-child(4) { left: 50%; animation-duration: 22s; animation-delay: 1s; width: 70px; }
-        .helmet:nth-child(5) { left: 65%; animation-duration: 28s; animation-delay: 8s; width: 65px; }
-        .helmet:nth-child(6) { left: 80%; animation-duration: 20s; animation-delay: 4s; width: 55px; }
-        .helmet:nth-child(7) { left: 95%; animation-duration: 26s; animation-delay: 10s; width: 75px; }
+        /* Уменьшенные размеры для каждого шлема */
+        .helmet:nth-child(1) { left: 5%; animation-duration: 25s; animation-delay: 0s; width: 35px; }
+        .helmet:nth-child(2) { left: 20%; animation-duration: 18s; animation-delay: 3s; width: 45px; }
+        .helmet:nth-child(3) { left: 35%; animation-duration: 30s; animation-delay: 6s; width: 30px; }
+        .helmet:nth-child(4) { left: 50%; animation-duration: 22s; animation-delay: 1s; width: 40px; }
+        .helmet:nth-child(5) { left: 65%; animation-duration: 28s; animation-delay: 8s; width: 38px; }
+        .helmet:nth-child(6) { left: 80%; animation-duration: 20s; animation-delay: 4s; width: 32px; }
+        .helmet:nth-child(7) { left: 95%; animation-duration: 26s; animation-delay: 10s; width: 42px; }
 
         /* --- АВАТАРКА --- */
         .avatar {
@@ -113,8 +113,8 @@
         
         /* --- КНОПКА W.TV (Светлее, без рамки) --- */
         .wtv { 
-            background-color: #555555; /* Светло-серый цвет */
-            border: none; /* Убрали рамку */
+            background-color: #555555;
+            border: none;
         }
         .w-icon {
             display: inline-flex;
@@ -161,14 +161,14 @@
         }
         @keyframes floatUp {
             0% { transform: translateY(0) rotate(0deg); opacity: 0; }
-            10% { opacity: 0.3; }
-            90% { opacity: 0.3; }
+            10% { opacity: 0.2; } /* Сделал чуть прозрачнее, чтобы не отвлекали */
+            90% { opacity: 0.2; }
             100% { transform: translateY(-120vh) rotate(360deg); opacity: 0; }
         }
     </style>
 </head>
 <body>
-    <!-- ЛЕТАЮЩИЕ ШЛЕМЫ (ЗАМЕНИТЕ helmet.png НА ИМЯ ВАШЕГО ФАЙЛА) -->
+    <!-- ЛЕТАЮЩИЕ ШЛЕМЫ -->
     <div class="background-helmets">
         <img src="helmet.png" class="helmet" alt="">
         <img src="helmet.png" class="helmet" alt="">
@@ -182,7 +182,7 @@
     <div class="container">
         <img src="https://unavatar.io/twitch/krabick" alt="Аватар" class="avatar">
         
-        <h1>KrabickTwitch</h1>
+        <h1>Krabick</h1>
         <p>Стример и просто хороший человек</p>
 
         <a href="https://twitch.tv/krabick" class="link-btn twitch" target="_blank">
@@ -220,7 +220,6 @@
             </div>
         </div>
 
-        <!-- КНОПКА W.TV (Светлее, без рамки) -->
         <a href="https://w.tv/krabick" class="link-btn wtv" target="_blank">
             <span class="w-icon">W</span> w.tv
         </a>
