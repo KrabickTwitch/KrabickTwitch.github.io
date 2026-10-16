@@ -3,17 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KrabickTwitch - Ссылки</title>
+    <title>Krabick - Ссылки</title>
     <!-- Подключаем красивый шрифт -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
     <!-- Подключаем иконки Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* --- ОБЩИЕ НАСТРОЙКИ И ФОН --- */
+        /* --- ОБЩИЕ НАСТРОЙКИ И АНИМИРОВАННЫЙ ФОН --- */
         body {
             font-family: 'Inter', sans-serif;
-            /* Темный градиентный фон (как ночной космос) */
-            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            /* Тёмный градиент, который будет двигаться */
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e, #1a1a2e);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite; /* Плавное переливание */
             color: #ffffff;
             display: flex;
             flex-direction: column;
@@ -28,7 +30,7 @@
             max-width: 450px;
             width: 100%;
             text-align: center;
-            animation: fadeIn 1s ease-in-out; /* Плавное появление сайта */
+            animation: fadeIn 1s ease-in-out;
         }
         
         /* --- АВАТАРКА --- */
@@ -37,13 +39,13 @@
             height: 130px;
             border-radius: 50%;
             object-fit: cover;
-            border: 4px solid #9146FF; /* Фиолетовая рамка */
-            box-shadow: 0 0 25px rgba(145, 70, 255, 0.6); /* Свечение вокруг аватарки */
+            border: 4px solid #6b2fbf; /* Более тёмный фиолетовый */
+            box-shadow: 0 0 25px rgba(107, 47, 191, 0.6);
             margin-bottom: 15px;
             transition: transform 0.3s ease;
         }
         .avatar:hover {
-            transform: scale(1.05); /* Увеличение при наведении */
+            transform: scale(1.05);
         }
 
         /* --- ТЕКСТ --- */
@@ -59,12 +61,12 @@
             margin-bottom: 30px;
         }
 
-        /* --- КНОПКИ-ССЫЛКИ --- */
+        /* --- ОСНОВНЫЕ КНОПКИ (ТЁМНЫЕ ОТТЕНКИ) --- */
         .link-btn {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 12px; /* Расстояние между иконкой и текстом */
+            gap: 12px;
             padding: 16px;
             margin-bottom: 15px;
             border-radius: 12px;
@@ -72,60 +74,118 @@
             text-decoration: none;
             font-weight: 600;
             font-size: 16px;
-            transition: all 0.3s ease; /* Плавная анимация */
+            transition: all 0.3s ease;
             border: none;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
         }
-        
-        /* Эффект при наведении на кнопку */
         .link-btn:hover {
-            transform: translateY(-4px); /* Кнопка "подпрыгивает" */
-            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
-            filter: brightness(1.15); /* Кнопка становится чуть ярче */
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            filter: brightness(1.15);
         }
 
-        /* --- ЦВЕТА ДЛЯ КАЖДОЙ ПЛАТФОРМЫ --- */
-        .twitch { background-color: #9146FF; }
-        .youtube { background-color: #FF0000; }
-        .telegram { background-color: #24A1DE; }
-        .discord { background-color: #5865F2; }
-        .tiktok { background-color: #000000; border: 1px solid #333; }
-        .vk { background-color: #0077FF; }
-        .donate { background-color: #FF5E5E; } /* Для донатов */
+        /* Тёмные цвета платформ */
+        .twitch { background-color: #5c2e9e; }
+        .youtube { background-color: #b30000; }
+        .telegram { background-color: #1877a8; }
+        .discord { background-color: #3f4bb5; }
+        .donate { background-color: #cc4444; }
 
-        /* Анимация появления */
+        /* --- РАСКРЫВАЮЩИЕСЯ ГРУППЫ (YOUTUBE, TELEGRAM) --- */
+        .link-group {
+            margin-bottom: 15px;
+            position: relative;
+        }
+        .sub-links {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease, opacity 0.5s ease;
+            opacity: 0;
+            margin-top: 5px;
+        }
+        .link-group:hover .sub-links {
+            max-height: 300px; /* Достаточно для нескольких ссылок */
+            opacity: 1;
+        }
+        .sub-links .link-btn {
+            margin-bottom: 8px;
+            font-size: 14px;
+            padding: 12px;
+            filter: brightness(0.7); /* Затемнение подссылок */
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+        .sub-links .link-btn:hover {
+            filter: brightness(1); /* Возвращаем яркость при наведении */
+            transform: translateY(-2px);
+        }
+
+        /* --- АНИМАЦИИ --- */
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- Аватарка (замените ник на свой) -->
+        <!-- Аватарка -->
         <img src="https://unavatar.io/twitch/krabick" alt="Аватар" class="avatar">
         
         <h1>KrabickTwitch</h1>
         <p>Стример и просто хороший человек</p>
 
-        <!-- ССЫЛКИ (замените ссылки в href на свои) -->
+        <!-- Twitch (отдельная кнопка) -->
         <a href="https://twitch.tv/krabick" class="link-btn twitch" target="_blank">
             <i class="fab fa-twitch"></i> Twitch
         </a>
-        
-        <a href="https://youtube.com/@krabickVODs" class="link-btn youtube" target="_blank">
-            <i class="fab fa-youtube"></i> ЗАПИСЬ СТРИМОВ
 
-        </a>
-        
-        <a href="https://t.me/krabick" class="link-btn telegram" target="_blank">
-            <i class="fab fa-telegram"></i> Telegram
-        </a>
-        
+        <!-- Группа YouTube (раскрывается при наведении) -->
+        <div class="link-group">
+            <a href="https://youtube.com/@krabickVODs" class="link-btn youtube" target="_blank">
+                <i class="fab fa-youtube"></i> YouTube
+            </a>
+            <div class="sub-links">
+                <!-- Основной канал (замените ссылку) -->
+                <a href="https://youtube.com/@krabick" class="link-btn youtube" target="_blank">
+                    <i class="fab fa-youtube"></i> Основной канал
+                </a>
+                <!-- Записи стримов (ваша текущая ссылка) -->
+                <a href="https://youtube.com/@krabickVODs" class="link-btn youtube" target="_blank">
+                    <i class="fas fa-video"></i> Записи стримов
+                </a>
+                <!-- Клипы (замените ссылку) -->
+                <a href="https://youtube.com/@krabickClips" class="link-btn youtube" target="_blank">
+                    <i class="fas fa-film"></i> Клипы
+                </a>
+            </div>
+        </div>
+
+        <!-- Группа Telegram (раскрывается при наведении) -->
+        <div class="link-group">
+            <a href="https://t.me/krabick" class="link-btn telegram" target="_blank">
+                <i class="fab fa-telegram"></i> Telegram
+            </a>
+            <div class="sub-links">
+                <!-- Канал (ваша текущая ссылка) -->
+                <a href="https://t.me/krabick" class="link-btn telegram" target="_blank">
+                    <i class="fab fa-telegram"></i> Канал
+                </a>
+                <!-- Чат (замените ссылку) -->
+                <a href="https://t.me/krabick_chat" class="link-btn telegram" target="_blank">
+                    <i class="fas fa-comments"></i> Чат
+                </a>
+            </div>
+        </div>
+
+        <!-- Discord (отдельная кнопка) -->
         <a href="https://discord.com/invite/4cCk3pj" class="link-btn discord" target="_blank">
             <i class="fab fa-discord"></i> Discord
         </a>
-
     </div>
 </body>
 </html>
