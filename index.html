@@ -25,14 +25,46 @@
             margin: 0;
             padding: 20px;
             box-sizing: border-box;
+            position: relative; /* Чтобы шлемы позиционировались относительно body */
+            overflow-x: hidden; /* Скрываем горизонтальную прокрутку от шлемов */
         }
+        
         .container {
             max-width: 450px;
             width: 100%;
             text-align: center;
             animation: fadeIn 1s ease-in-out;
+            position: relative; /* Чтобы контент был поверх шлемов */
+            z-index: 10;
         }
         
+        /* --- ЛЕТАЮЩИЕ ШЛЕМЫ НА ФОНЕ --- */
+        .background-helmets {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none; /* Чтобы шлемы не мешали кликам по кнопкам */
+            z-index: 1; /* Шлемы находятся за контентом */
+            overflow: hidden;
+        }
+        .helmet {
+            position: absolute;
+            bottom: -100px; /* Начинаем за нижним краем экрана */
+            width: 60px; /* Размер шлема */
+            opacity: 0; /* Изначально невидимы */
+            animation: floatUp 20s linear infinite; /* Анимация подъёма */
+        }
+        /* Разные размеры, скорости и задержки для каждого шлема, чтобы они не летели кучей */
+        .helmet:nth-child(1) { left: 5%; animation-duration: 25s; animation-delay: 0s; width: 50px; }
+        .helmet:nth-child(2) { left: 20%; animation-duration: 18s; animation-delay: 3s; width: 70px; }
+        .helmet:nth-child(3) { left: 35%; animation-duration: 30s; animation-delay: 6s; width: 40px; }
+        .helmet:nth-child(4) { left: 50%; animation-duration: 22s; animation-delay: 1s; width: 60px; }
+        .helmet:nth-child(5) { left: 65%; animation-duration: 28s; animation-delay: 8s; width: 55px; }
+        .helmet:nth-child(6) { left: 80%; animation-duration: 20s; animation-delay: 4s; width: 45px; }
+        .helmet:nth-child(7) { left: 95%; animation-duration: 26s; animation-delay: 10s; width: 65px; }
+
         /* --- АВАТАРКА --- */
         .avatar {
             width: 130px;
@@ -77,6 +109,8 @@
             transition: all 0.3s ease;
             border: none;
             box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            position: relative;
+            z-index: 11; /* Кнопки поверх шлемов */
         }
         .link-btn:hover {
             transform: translateY(-4px);
@@ -90,6 +124,7 @@
         .telegram { background-color: #1877a8; }
         .discord { background-color: #3f4bb5; }
         .donate { background-color: #cc4444; }
+        .wtv { background-color: #4a4a4a; } /* Нейтральный тёмно-серый для новой кнопки */
 
         /* --- РАСКРЫВАЮЩИЕСЯ ГРУППЫ (YOUTUBE, TELEGRAM) --- */
         .link-group {
@@ -129,9 +164,36 @@
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
+        @keyframes floatUp {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.15; /* Шлемы полупрозрачные, чтобы не отвлекать */
+            }
+            90% {
+                opacity: 0.15;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg); /* Улетаем вверх и немного вращаемся */
+                opacity: 0;
+            }
+        }
     </style>
 </head>
 <body>
+    <!-- ЛЕТАЮЩИЕ ШЛЕМЫ (позади всего контента) -->
+    <div class="background-helmets">
+        <img src="https://pngsucai.com/uploads/2023/09/21/650c0c0d0a0e6.png" class="helmet" alt="">
+        <img src="https://pngsucai.com/uploads/2023/09/21/650c0c0d0a0e6.png" class="helmet" alt="">
+        <img src="https://pngsucai.com/uploads/2023/09/21/650c0c0d0a0e6.png" class="helmet" alt="">
+        <img src="https://pngsucai.com/uploads/2023/09/21/650c0c0d0a0e6.png" class="helmet" alt="">
+        <img src="https://pngsucai.com/uploads/2023/09/21/650c0c0d0a0e6.png" class="helmet" alt="">
+        <img src="https://pngsucai.com/uploads/2023/09/21/650c0c0d0a0e6.png" class="helmet" alt="">
+        <img src="https://pngsucai.com/uploads/2023/09/21/650c0c0d0a0e6.png" class="helmet" alt="">
+    </div>
+
     <div class="container">
         <!-- Аватарка -->
         <img src="https://unavatar.io/twitch/krabick" alt="Аватар" class="avatar">
@@ -150,15 +212,12 @@
                 <i class="fab fa-youtube"></i> YouTube
             </a>
             <div class="sub-links">
-                <!-- Основной канал (замените ссылку) -->
                 <a href="https://youtube.com/@krabick" class="link-btn youtube" target="_blank">
                     <i class="fab fa-youtube"></i> Основной канал
                 </a>
-                <!-- Записи стримов (ваша текущая ссылка) -->
                 <a href="https://youtube.com/@krabickVODs" class="link-btn youtube" target="_blank">
                     <i class="fas fa-video"></i> Записи стримов
                 </a>
-                <!-- Клипы (замените ссылку) -->
                 <a href="https://youtube.com/@krabickClips" class="link-btn youtube" target="_blank">
                     <i class="fas fa-film"></i> Клипы
                 </a>
@@ -171,16 +230,19 @@
                 <i class="fab fa-telegram"></i> Telegram
             </a>
             <div class="sub-links">
-                <!-- Канал (ваша текущая ссылка) -->
                 <a href="https://t.me/krabick" class="link-btn telegram" target="_blank">
                     <i class="fab fa-telegram"></i> Канал
                 </a>
-                <!-- Чат (замените ссылку) -->
                 <a href="https://t.me/krabick_chat" class="link-btn telegram" target="_blank">
                     <i class="fas fa-comments"></i> Чат
                 </a>
             </div>
         </div>
+
+        <!-- НОВАЯ КНОПКА: w.tv -->
+        <a href="https://w.tv/krabick" class="link-btn wtv" target="_blank">
+            <i class="fas fa-shield-alt"></i> w.tv
+        </a>
 
         <!-- Discord (отдельная кнопка) -->
         <a href="https://discord.com/invite/4cCk3pj" class="link-btn discord" target="_blank">
