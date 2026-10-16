@@ -4,18 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Krabick - Ссылки</title>
-    <!-- Подключаем красивый шрифт -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-    <!-- Подключаем иконки Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* --- ОБЩИЕ НАСТРОЙКИ И АНИМИРОВАННЫЙ ФОН --- */
         body {
             font-family: 'Inter', sans-serif;
-            /* Тёмный градиент, который будет двигаться */
             background: linear-gradient(135deg, #0f0c29, #302b63, #24243e, #1a1a2e);
             background-size: 400% 400%;
-            animation: gradientShift 15s ease infinite; /* Плавное переливание */
+            animation: gradientShift 15s ease infinite;
             color: #ffffff;
             display: flex;
             flex-direction: column;
@@ -25,8 +22,8 @@
             margin: 0;
             padding: 20px;
             box-sizing: border-box;
-            position: relative; /* Чтобы шлемы позиционировались относительно body */
-            overflow-x: hidden; /* Скрываем горизонтальную прокрутку от шлемов */
+            position: relative;
+            overflow-x: hidden;
         }
         
         .container {
@@ -34,29 +31,30 @@
             width: 100%;
             text-align: center;
             animation: fadeIn 1s ease-in-out;
-            position: relative; /* Чтобы контент был поверх шлемов */
+            position: relative;
             z-index: 10;
         }
         
-        /* --- ЛЕТАЮЩИЕ ШЛЕМЫ НА ФОНЕ (ВСТРОЕННЫЕ SVG) --- */
+        /* --- ЛЕТАЮЩИЕ ШЛЕМЫ (ИЗ ВАШЕГО ФАЙЛА) --- */
         .background-helmets {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            pointer-events: none; /* Чтобы шлемы не мешали кликам по кнопкам */
-            z-index: 1; /* Шлемы находятся за контентом */
+            pointer-events: none; /* Чтобы не мешали кликам */
+            z-index: 1;
             overflow: hidden;
         }
         .helmet {
             position: absolute;
-            bottom: -120px; /* Начинаем за нижним краем экрана */
-            width: 70px; /* Размер шлема */
-            opacity: 0; /* Изначально невидимы */
-            animation: floatUp 25s linear infinite; /* Анимация подъёма */
+            bottom: -120px;
+            width: 70px;
+            opacity: 0;
+            animation: floatUp 25s linear infinite;
+            /* Если ваш файл называется иначе, поменяйте имя в src ниже */
         }
-        /* Разные размеры, скорости и задержки для каждого шлема, чтобы они не летели кучей */
+        /* Настройки для каждого шлема (размер, скорость, задержка) */
         .helmet:nth-child(1) { left: 5%; animation-duration: 25s; animation-delay: 0s; width: 60px; }
         .helmet:nth-child(2) { left: 20%; animation-duration: 18s; animation-delay: 3s; width: 80px; }
         .helmet:nth-child(3) { left: 35%; animation-duration: 30s; animation-delay: 6s; width: 50px; }
@@ -71,29 +69,18 @@
             height: 130px;
             border-radius: 50%;
             object-fit: cover;
-            border: 4px solid #6b2fbf; /* Более тёмный фиолетовый */
+            border: 4px solid #6b2fbf;
             box-shadow: 0 0 25px rgba(107, 47, 191, 0.6);
             margin-bottom: 15px;
             transition: transform 0.3s ease;
         }
-        .avatar:hover {
-            transform: scale(1.05);
-        }
+        .avatar:hover { transform: scale(1.05); }
 
         /* --- ТЕКСТ --- */
-        h1 {
-            font-size: 28px;
-            font-weight: 800;
-            margin: 10px 0 5px 0;
-            letter-spacing: 1px;
-        }
-        p {
-            font-size: 15px;
-            color: #b0b0b0;
-            margin-bottom: 30px;
-        }
+        h1 { font-size: 28px; font-weight: 800; margin: 10px 0 5px 0; letter-spacing: 1px; }
+        p { font-size: 15px; color: #b0b0b0; margin-bottom: 30px; }
 
-        /* --- ОСНОВНЫЕ КНОПКИ (ТЁМНЫЕ ОТТЕНКИ) --- */
+        /* --- ОСНОВНЫЕ КНОПКИ --- */
         .link-btn {
             display: flex;
             align-items: center;
@@ -110,7 +97,7 @@
             border: none;
             box-shadow: 0 4px 15px rgba(0,0,0,0.3);
             position: relative;
-            z-index: 11; /* Кнопки поверх шлемов */
+            z-index: 11;
         }
         .link-btn:hover {
             transform: translateY(-4px);
@@ -123,12 +110,11 @@
         .youtube { background-color: #b30000; }
         .telegram { background-color: #1877a8; }
         .discord { background-color: #3f4bb5; }
-        .donate { background-color: #cc4444; }
         
-        /* --- КНОПКА W.TV (ЧЕРНЫЙ ФОН, БЕЛАЯ W) --- */
+        /* --- КНОПКА W.TV (Светлее, без рамки) --- */
         .wtv { 
-            background-color: #000000; 
-            border: 1px solid #333; /* Легкая рамка, чтобы кнопка не сливалась с фоном */
+            background-color: #555555; /* Светло-серый цвет */
+            border: none; /* Убрали рамку */
         }
         .w-icon {
             display: inline-flex;
@@ -144,11 +130,8 @@
             font-family: Arial, sans-serif;
         }
 
-        /* --- РАСКРЫВАЮЩИЕСЯ ГРУППЫ (YOUTUBE, TELEGRAM) --- */
-        .link-group {
-            margin-bottom: 15px;
-            position: relative;
-        }
+        /* --- РАСКРЫВАЮЩИЕСЯ ГРУППЫ --- */
+        .link-group { margin-bottom: 15px; position: relative; }
         .sub-links {
             max-height: 0;
             overflow: hidden;
@@ -156,21 +139,15 @@
             opacity: 0;
             margin-top: 5px;
         }
-        .link-group:hover .sub-links {
-            max-height: 300px; /* Достаточно для нескольких ссылок */
-            opacity: 1;
-        }
+        .link-group:hover .sub-links { max-height: 300px; opacity: 1; }
         .sub-links .link-btn {
             margin-bottom: 8px;
             font-size: 14px;
             padding: 12px;
-            filter: brightness(0.7); /* Затемнение подссылок */
+            filter: brightness(0.7);
             box-shadow: 0 2px 8px rgba(0,0,0,0.3);
         }
-        .sub-links .link-btn:hover {
-            filter: brightness(1); /* Возвращаем яркость при наведении */
-            transform: translateY(-2px);
-        }
+        .sub-links .link-btn:hover { filter: brightness(1); transform: translateY(-2px); }
 
         /* --- АНИМАЦИИ --- */
         @keyframes fadeIn {
@@ -183,97 +160,35 @@
             100% { background-position: 0% 50%; }
         }
         @keyframes floatUp {
-            0% {
-                transform: translateY(0) rotate(0deg);
-                opacity: 0;
-            }
-            10% {
-                opacity: 0.3; /* Шлемы стали более заметными */
-            }
-            90% {
-                opacity: 0.3;
-            }
-            100% {
-                transform: translateY(-120vh) rotate(360deg); /* Улетаем вверх и немного вращаемся */
-                opacity: 0;
-            }
+            0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.3; }
+            90% { opacity: 0.3; }
+            100% { transform: translateY(-120vh) rotate(360deg); opacity: 0; }
         }
     </style>
 </head>
 <body>
-    <!-- ЛЕТАЮЩИЕ ШЛЕМЫ (ВСТРОЕННЫЕ SVG) -->
+    <!-- ЛЕТАЮЩИЕ ШЛЕМЫ (ЗАМЕНИТЕ helmet.png НА ИМЯ ВАШЕГО ФАЙЛА) -->
     <div class="background-helmets">
-        <!-- Шлем 1 -->
-        <svg class="helmet" viewBox="0 0 100 120" xmlns="http://www.w3.org/2000/svg">
-            <path d="M50 10 C30 10 15 25 15 50 L25 100 L50 115 L75 100 L85 50 C85 25 70 10 50 10 Z" fill="rgba(255,255,255,0.15)" stroke="rgba(255,255,255,0.5)" stroke-width="2"/>
-            <path d="M50 50 L40 100 L60 100 Z" fill="rgba(255,255,255,0.2)"/>
-            <ellipse cx="35" cy="45" rx="8" ry="5" fill="rgba(255,255,255,0.4)"/>
-            <ellipse cx="65" cy="45" rx="8" ry="5" fill="rgba(255,255,255,0.4)"/>
-            <path d="M20 70 L35 75 M80 70 L65 75" stroke="rgba(255,255,255,0.4)" stroke-width="2"/>
-        </svg>
-        <!-- Шлем 2 -->
-        <svg class="helmet" viewBox="0 0 100 120" xmlns="http://www.w3.org/2000/svg">
-            <path d="M50 10 C30 10 15 25 15 50 L25 100 L50 115 L75 100 L85 50 C85 25 70 10 50 10 Z" fill="rgba(255,255,255,0.15)" stroke="rgba(255,255,255,0.5)" stroke-width="2"/>
-            <path d="M50 50 L40 100 L60 100 Z" fill="rgba(255,255,255,0.2)"/>
-            <ellipse cx="35" cy="45" rx="8" ry="5" fill="rgba(255,255,255,0.4)"/>
-            <ellipse cx="65" cy="45" rx="8" ry="5" fill="rgba(255,255,255,0.4)"/>
-            <path d="M20 70 L35 75 M80 70 L65 75" stroke="rgba(255,255,255,0.4)" stroke-width="2"/>
-        </svg>
-        <!-- Шлем 3 -->
-        <svg class="helmet" viewBox="0 0 100 120" xmlns="http://www.w3.org/2000/svg">
-            <path d="M50 10 C30 10 15 25 15 50 L25 100 L50 115 L75 100 L85 50 C85 25 70 10 50 10 Z" fill="rgba(255,255,255,0.15)" stroke="rgba(255,255,255,0.5)" stroke-width="2"/>
-            <path d="M50 50 L40 100 L60 100 Z" fill="rgba(255,255,255,0.2)"/>
-            <ellipse cx="35" cy="45" rx="8" ry="5" fill="rgba(255,255,255,0.4)"/>
-            <ellipse cx="65" cy="45" rx="8" ry="5" fill="rgba(255,255,255,0.4)"/>
-            <path d="M20 70 L35 75 M80 70 L65 75" stroke="rgba(255,255,255,0.4)" stroke-width="2"/>
-        </svg>
-        <!-- Шлем 4 -->
-        <svg class="helmet" viewBox="0 0 100 120" xmlns="http://www.w3.org/2000/svg">
-            <path d="M50 10 C30 10 15 25 15 50 L25 100 L50 115 L75 100 L85 50 C85 25 70 10 50 10 Z" fill="rgba(255,255,255,0.15)" stroke="rgba(255,255,255,0.5)" stroke-width="2"/>
-            <path d="M50 50 L40 100 L60 100 Z" fill="rgba(255,255,255,0.2)"/>
-            <ellipse cx="35" cy="45" rx="8" ry="5" fill="rgba(255,255,255,0.4)"/>
-            <ellipse cx="65" cy="45" rx="8" ry="5" fill="rgba(255,255,255,0.4)"/>
-            <path d="M20 70 L35 75 M80 70 L65 75" stroke="rgba(255,255,255,0.4)" stroke-width="2"/>
-        </svg>
-        <!-- Шлем 5 -->
-        <svg class="helmet" viewBox="0 0 100 120" xmlns="http://www.w3.org/2000/svg">
-            <path d="M50 10 C30 10 15 25 15 50 L25 100 L50 115 L75 100 L85 50 C85 25 70 10 50 10 Z" fill="rgba(255,255,255,0.15)" stroke="rgba(255,255,255,0.5)" stroke-width="2"/>
-            <path d="M50 50 L40 100 L60 100 Z" fill="rgba(255,255,255,0.2)"/>
-            <ellipse cx="35" cy="45" rx="8" ry="5" fill="rgba(255,255,255,0.4)"/>
-            <ellipse cx="65" cy="45" rx="8" ry="5" fill="rgba(255,255,255,0.4)"/>
-            <path d="M20 70 L35 75 M80 70 L65 75" stroke="rgba(255,255,255,0.4)" stroke-width="2"/>
-        </svg>
-        <!-- Шлем 6 -->
-        <svg class="helmet" viewBox="0 0 100 120" xmlns="http://www.w3.org/2000/svg">
-            <path d="M50 10 C30 10 15 25 15 50 L25 100 L50 115 L75 100 L85 50 C85 25 70 10 50 10 Z" fill="rgba(255,255,255,0.15)" stroke="rgba(255,255,255,0.5)" stroke-width="2"/>
-            <path d="M50 50 L40 100 L60 100 Z" fill="rgba(255,255,255,0.2)"/>
-            <ellipse cx="35" cy="45" rx="8" ry="5" fill="rgba(255,255,255,0.4)"/>
-            <ellipse cx="65" cy="45" rx="8" ry="5" fill="rgba(255,255,255,0.4)"/>
-            <path d="M20 70 L35 75 M80 70 L65 75" stroke="rgba(255,255,255,0.4)" stroke-width="2"/>
-        </svg>
-        <!-- Шлем 7 -->
-        <svg class="helmet" viewBox="0 0 100 120" xmlns="http://www.w3.org/2000/svg">
-            <path d="M50 10 C30 10 15 25 15 50 L25 100 L50 115 L75 100 L85 50 C85 25 70 10 50 10 Z" fill="rgba(255,255,255,0.15)" stroke="rgba(255,255,255,0.5)" stroke-width="2"/>
-            <path d="M50 50 L40 100 L60 100 Z" fill="rgba(255,255,255,0.2)"/>
-            <ellipse cx="35" cy="45" rx="8" ry="5" fill="rgba(255,255,255,0.4)"/>
-            <ellipse cx="65" cy="45" rx="8" ry="5" fill="rgba(255,255,255,0.4)"/>
-            <path d="M20 70 L35 75 M80 70 L65 75" stroke="rgba(255,255,255,0.4)" stroke-width="2"/>
-        </svg>
+        <img src="helmet.png" class="helmet" alt="">
+        <img src="helmet.png" class="helmet" alt="">
+        <img src="helmet.png" class="helmet" alt="">
+        <img src="helmet.png" class="helmet" alt="">
+        <img src="helmet.png" class="helmet" alt="">
+        <img src="helmet.png" class="helmet" alt="">
+        <img src="helmet.png" class="helmet" alt="">
     </div>
 
     <div class="container">
-        <!-- Аватарка -->
         <img src="https://unavatar.io/twitch/krabick" alt="Аватар" class="avatar">
         
         <h1>KrabickTwitch</h1>
         <p>Стример и просто хороший человек</p>
 
-        <!-- Twitch (отдельная кнопка) -->
         <a href="https://twitch.tv/krabick" class="link-btn twitch" target="_blank">
             <i class="fab fa-twitch"></i> Twitch
         </a>
 
-        <!-- Группа YouTube (раскрывается при наведении) -->
         <div class="link-group">
             <a href="https://youtube.com/@krabickVODs" class="link-btn youtube" target="_blank">
                 <i class="fab fa-youtube"></i> YouTube
@@ -291,7 +206,6 @@
             </div>
         </div>
 
-        <!-- Группа Telegram (раскрывается при наведении) -->
         <div class="link-group">
             <a href="https://t.me/krabick" class="link-btn telegram" target="_blank">
                 <i class="fab fa-telegram"></i> Telegram
@@ -306,12 +220,11 @@
             </div>
         </div>
 
-        <!-- НОВАЯ КНОПКА: w.tv (Черный фон, белая W) -->
+        <!-- КНОПКА W.TV (Светлее, без рамки) -->
         <a href="https://w.tv/krabick" class="link-btn wtv" target="_blank">
             <span class="w-icon">W</span> w.tv
         </a>
 
-        <!-- Discord (отдельная кнопка) -->
         <a href="https://discord.com/invite/4cCk3pj" class="link-btn discord" target="_blank">
             <i class="fab fa-discord"></i> Discord
         </a>
