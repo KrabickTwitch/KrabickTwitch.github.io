@@ -4,10 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Krabick - Ссылки</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Unbounded:wght@600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* --- ОБЩИЕ НАСТРОЙКИ И АНИМИРОВАННЫЙ ФОН --- */
+        * { box-sizing: border-box; }
+
         body {
             font-family: 'Inter', sans-serif;
             background: linear-gradient(135deg, #0f0c29, #302b63, #24243e, #1a1a2e);
@@ -21,32 +23,89 @@
             min-height: 100vh;
             margin: 0;
             padding: 20px;
-            box-sizing: border-box;
+            position: relative;
+            overflow-x: hidden;
         }
-        
+
+        /* --- МЯГКАЯ "ПЫЛЬ" НА ФОНЕ --- */
+        .dust {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+        .dust span {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: #fff;
+            border-radius: 50%;
+            opacity: 0;
+            animation: twinkle 6s ease-in-out infinite;
+        }
+        .dust span:nth-child(1)  { left: 8%;  top: 20%; animation-delay: 0s; }
+        .dust span:nth-child(2)  { left: 25%; top: 70%; animation-delay: 1s; }
+        .dust span:nth-child(3)  { left: 40%; top: 30%; animation-delay: 2s; }
+        .dust span:nth-child(4)  { left: 60%; top: 80%; animation-delay: 3s; }
+        .dust span:nth-child(5)  { left: 75%; top: 15%; animation-delay: 4s; }
+        .dust span:nth-child(6)  { left: 90%; top: 55%; animation-delay: 5s; }
+        .dust span:nth-child(7)  { left: 15%; top: 45%; animation-delay: 2.5s; }
+        .dust span:nth-child(8)  { left: 55%; top: 10%; animation-delay: 1.5s; }
+        .dust span:nth-child(9)  { left: 85%; top: 90%; animation-delay: 3.5s; }
+        .dust span:nth-child(10) { left: 50%; top: 50%; animation-delay: 4.5s; }
+
+        /* --- КОНТЕЙНЕР --- */
         .container {
             max-width: 450px;
             width: 100%;
             text-align: center;
             animation: fadeIn 1s ease-in-out;
+            position: relative;
+            z-index: 10;
         }
 
-        /* --- АВАТАРКА --- */
+        /* --- АВАТАРКА С АНИМИРОВАННЫМ КОЛЬЦОМ --- */
+        .avatar-wrapper {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+        .avatar-wrapper::before {
+            content: '';
+            position: absolute;
+            inset: -6px;
+            border-radius: 50%;
+            background: conic-gradient(from 0deg, #9146FF, #00d4ff, #9146FF);
+            animation: rotateRing 4s linear infinite;
+            z-index: -1;
+            filter: blur(3px);
+            opacity: 0.9;
+        }
         .avatar {
             width: 130px;
             height: 130px;
             border-radius: 50%;
             object-fit: cover;
-            border: 4px solid #6b2fbf;
-            box-shadow: 0 0 25px rgba(107, 47, 191, 0.6);
-            margin-bottom: 15px;
+            border: 4px solid #0f0c29;
+            display: block;
             transition: transform 0.3s ease;
         }
         .avatar:hover { transform: scale(1.05); }
 
         /* --- ТЕКСТ --- */
-        h1 { font-size: 28px; font-weight: 800; margin: 10px 0 5px 0; letter-spacing: 1px; }
-        p { font-size: 15px; color: #b0b0b0; margin-bottom: 30px; }
+        h1 {
+            font-family: 'Unbounded', sans-serif;
+            font-size: 26px;
+            font-weight: 800;
+            margin: 5px 0 5px 0;
+            letter-spacing: 0.5px;
+            background: linear-gradient(135deg, #ffffff, #b78aff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        p { font-size: 14px; color: #b0b0b0; margin-bottom: 30px; }
 
         /* --- ОСНОВНЫЕ КНОПКИ --- */
         .link-btn {
@@ -55,52 +114,48 @@
             justify-content: center;
             gap: 12px;
             padding: 16px;
-            margin-bottom: 15px;
-            border-radius: 12px;
+            margin-bottom: 14px;
+            border-radius: 14px;
             color: #ffffff;
             text-decoration: none;
             font-weight: 600;
-            font-size: 16px;
+            font-size: 15px;
             transition: all 0.3s ease;
             border: none;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.35);
         }
         .link-btn:hover {
             transform: translateY(-4px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-            filter: brightness(1.15);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.55);
+            filter: brightness(1.1);
         }
 
-        /* Тёмные цвета платформ */
-        .twitch { background-color: #5c2e9e; }
-        .youtube { background-color: #b30000; }
-        .telegram { background-color: #1877a8; }
-        .discord { background-color: #3f4bb5; }
-        .boosty { background-color: #ff6a00; }
-        
-        /* --- КНОПКА W.TV --- */
-        .wtv { 
-            background-color: #2a2a2a;
-        }
+        /* Градиентные цвета платформ */
+        .twitch   { background: linear-gradient(135deg, #6d3bbf, #4a1f8f); }
+        .youtube  { background: linear-gradient(135deg, #cc0000, #7a0000); }
+        .telegram { background: linear-gradient(135deg, #1f8fc7, #0f5a80); }
+        .discord  { background: linear-gradient(135deg, #4a5bd9, #2c3590); }
+        .boosty   { background: linear-gradient(135deg, #ff7a1a, #cc4d00); }
+        .wtv      { background: linear-gradient(135deg, #3a3a3a, #1a1a1a); }
 
         /* --- РАСКРЫВАЮЩИЕСЯ ГРУППЫ --- */
-        .link-group { margin-bottom: 15px; position: relative; }
+        .link-group { margin-bottom: 14px; position: relative; }
         .sub-links {
             max-height: 0;
             overflow: hidden;
             transition: max-height 0.5s ease, opacity 0.5s ease;
             opacity: 0;
-            margin-top: 5px;
+            margin-top: 4px;
         }
-        .link-group:hover .sub-links { max-height: 300px; opacity: 1; }
+        .link-group:hover .sub-links { max-height: 400px; opacity: 1; }
         .sub-links .link-btn {
             margin-bottom: 8px;
-            font-size: 14px;
+            font-size: 13px;
             padding: 12px;
-            filter: brightness(0.7);
-            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+            filter: brightness(0.75);
+            border-radius: 10px;
         }
-        .sub-links .link-btn:hover { filter: brightness(1); transform: translateY(-2px); }
+        .sub-links .link-btn:hover { filter: brightness(1); }
 
         /* --- АНИМАЦИИ --- */
         @keyframes fadeIn {
@@ -112,6 +167,19 @@
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
+        @keyframes rotateRing {
+            to { transform: rotate(360deg); }
+        }
+        @keyframes twinkle {
+            0%, 100% { opacity: 0; transform: scale(0.5); }
+            50% { opacity: 0.6; transform: scale(1); }
+        }
+
+        /* Кастомный скроллбар */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0f0c29; }
+        ::-webkit-scrollbar-thumb { background: #6b2fbf; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #9146FF; }
 
         /* ============================================ */
         /* === МОБИЛЬНАЯ ВЕРСИЯ (для экранов < 600px) === */
@@ -120,68 +188,62 @@
             body {
                 padding: 15px;
                 justify-content: flex-start;
-                padding-top: 30px;
+                padding-top: 40px;
                 padding-bottom: 30px;
             }
 
-            .avatar {
-                width: 100px;
-                height: 100px;
-                border-width: 3px;
-                box-shadow: 0 0 15px rgba(107, 47, 191, 0.5);
-            }
+            .avatar-wrapper { margin-bottom: 15px; }
+            .avatar { width: 100px; height: 100px; border-width: 3px; }
+            .avatar-wrapper::before { inset: -5px; }
 
-            h1 { font-size: 22px; }
-            p { font-size: 13px; margin-bottom: 20px; }
+            h1 { font-size: 20px; }
+            p { font-size: 12px; margin-bottom: 22px; }
 
-            /* Все кнопки одинаковые, удобные для пальца */
             .link-btn {
-                padding: 18px 16px;
-                font-size: 15px;
-                margin-bottom: 12px;
-                border-radius: 10px;
-                box-shadow: 0 3px 10px rgba(0,0,0,0.25);
+                padding: 17px 16px;
+                font-size: 14px;
+                margin-bottom: 11px;
+                border-radius: 11px;
             }
-            .link-btn:hover {
-                transform: none;
-                filter: brightness(1.1);
-            }
+            .link-btn:hover { transform: none; filter: brightness(1.08); }
 
-            /* ГЛАВНОЕ: принудительно раскрываем все подссылки */
+            /* Принудительно раскрываем все подссылки */
             .sub-links {
                 max-height: none !important;
                 opacity: 1 !important;
                 overflow: visible !important;
                 margin-top: 0;
             }
-
-            /* Подссылки на телефоне выглядят как обычные кнопки */
             .sub-links .link-btn {
-                margin-bottom: 12px;
-                font-size: 15px;
-                padding: 18px 16px;
+                margin-bottom: 11px;
+                font-size: 14px;
+                padding: 17px 16px;
                 filter: none;
-                box-shadow: 0 3px 10px rgba(0,0,0,0.25);
-                border-radius: 10px;
+                border-radius: 11px;
             }
-            .sub-links .link-btn:hover {
-                transform: none;
-                filter: brightness(1.1);
-            }
+            .sub-links .link-btn:hover { transform: none; filter: brightness(1.08); }
         }
 
-        /* Очень маленькие экраны */
         @media (max-width: 360px) {
             .avatar { width: 85px; height: 85px; }
-            h1 { font-size: 20px; }
-            .link-btn { font-size: 14px; padding: 16px 12px; }
+            h1 { font-size: 18px; }
+            .link-btn { font-size: 13px; padding: 15px 12px; }
         }
     </style>
 </head>
 <body>
+    <!-- МЯГКАЯ ПЫЛЬ НА ФОНЕ -->
+    <div class="dust">
+        <span></span><span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span><span></span>
+    </div>
+
     <div class="container">
-        <img src="https://unavatar.io/twitch/krabick" alt="Аватар" class="avatar">
-        
+        <!-- Аватарка с анимированным кольцом -->
+        <div class="avatar-wrapper">
+            <img src="https://unavatar.io/twitch/krabick" alt="Аватар" class="avatar">
+        </div>
+
         <h1>Krabick</h1>
         <p>Стример и просто хороший человек</p>
 
@@ -209,7 +271,7 @@
             </a>
             <div class="sub-links">
                 <a href="https://t.me/+DSt0P-oObZUwMjAy" class="link-btn telegram" target="_blank">
-                    <i class="fab fa-telegram"></i> Канал с записями 
+                    <i class="fab fa-telegram"></i> Канал с записями
                 </a>
             </div>
         </div>
@@ -228,6 +290,7 @@
         <a href="https://discord.com/invite/4cCk3pj" class="link-btn discord" target="_blank">
             <i class="fab fa-discord"></i> Discord
         </a>
+
         <a href="https://boosty.to/krabick" class="link-btn boosty" target="_blank">
             <i class="fas fa-hand-holding-heart"></i> Boosty (Записи Фильмов)
         </a>
